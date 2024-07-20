@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qian.qianbotbackend.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.qian.qianbotbackend.model.user.domain.User">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="userAccount" column="userAccount" jdbcType="VARCHAR"/>
+            <result property="userPassword" column="userPassword" jdbcType="VARCHAR"/>
+            <result property="userName" column="userName" jdbcType="VARCHAR"/>
+            <result property="userAvatar" column="userAvatar" jdbcType="VARCHAR"/>
+            <result property="userProfile" column="userProfile" jdbcType="VARCHAR"/>
+            <result property="userRole" column="userRole" jdbcType="VARCHAR"/>
+            <result property="userEmail" column="userEmail" jdbcType="VARCHAR"/>
+            <result property="userPhone" column="userPhone" jdbcType="VARCHAR"/>
+            <result property="userGender" column="userGender" jdbcType="TINYINT"/>
+            <result property="userBirthday" column="userBirthday" jdbcType="DATE"/>
+            <result property="userAddress" column="userAddress" jdbcType="VARCHAR"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,userAccount,userPassword,
+        userName,userAvatar,userProfile,
+        userRole,userEmail,userPhone,
+        userGender,userBirthday,userAddress,
+        createTime,updateTime,isDelete
+    </sql>
+</mapper>

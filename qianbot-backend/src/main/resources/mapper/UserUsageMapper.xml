@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qian.qianbotbackend.mapper.UserUsageMapper">
+
+    <resultMap id="BaseResultMap" type="com.qian.qianbotbackend.model.user.domain.UserUsage">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="usageId" column="usageId" jdbcType="BIGINT"/>
+            <result property="usageType" column="usageType" jdbcType="VARCHAR"/>
+            <result property="usedCount" column="usedCount" jdbcType="INTEGER"/>
+            <result property="remainingCount" column="remainingCount" jdbcType="INTEGER"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="userId" column="userId" jdbcType="BIGINT"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,usageId,usageType,
+        usedCount,remainingCount,remark,
+        userId,createTime,updateTime,
+        isDelete
+    </sql>
+</mapper>

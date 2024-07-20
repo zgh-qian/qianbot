@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qian.qianbotbackend.mapper.AppanswerMapper">
+
+    <resultMap id="BaseResultMap" type="com.qian.qianbotbackend.model.app.domain.Appanswer">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="appId" column="appId" jdbcType="BIGINT"/>
+            <result property="userAnswer" column="userAnswer" jdbcType="VARCHAR"/>
+            <result property="resultStatus" column="resultStatus" jdbcType="TINYINT"/>
+            <result property="resultId" column="resultId" jdbcType="BIGINT"/>
+            <result property="resultName" column="resultName" jdbcType="VARCHAR"/>
+            <result property="resultDesc" column="resultDesc" jdbcType="VARCHAR"/>
+            <result property="resultScore" column="resultScore" jdbcType="INTEGER"/>
+            <result property="resultPic" column="resultPic" jdbcType="VARCHAR"/>
+            <result property="userId" column="userId" jdbcType="BIGINT"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,appId,userAnswer,
+        resultStatus,resultId,resultName,
+        resultDesc,resultScore,userId,
+        createTime,updateTime,isDelete
+    </sql>
+</mapper>

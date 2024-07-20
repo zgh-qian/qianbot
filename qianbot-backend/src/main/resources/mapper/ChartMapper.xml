@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qian.qianbotbackend.mapper.ChartMapper">
+
+    <resultMap id="BaseResultMap" type="com.qian.qianbotbackend.model.chart.domain.Chart">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="chartName" column="chartName" jdbcType="VARCHAR"/>
+            <result property="chartGoal" column="chartGoal" jdbcType="VARCHAR"/>
+            <result property="chartType" column="chartType" jdbcType="VARCHAR"/>
+            <result property="chartData" column="chartData" jdbcType="VARCHAR"/>
+            <result property="genData" column="genData" jdbcType="VARCHAR"/>
+            <result property="genResult" column="genResult" jdbcType="VARCHAR"/>
+            <result property="chartStatus" column="chartStatus" jdbcType="TINYINT"/>
+            <result property="userId" column="userId" jdbcType="BIGINT"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,chartName,chartGoal,
+        chartType,chartData,genData,
+        genResult,chartStatus,userId,
+        createTime,updateTime,isDelete
+    </sql>
+</mapper>
