@@ -99,7 +99,7 @@ const handleDetail = (data: API.ChartVO) => {
 <template>
   <div id="appHistory">
     <a-table
-      :columns="columns"
+      :columns="columns as any"
       :data="historyData"
       :pagination="{
         showTotal: true,

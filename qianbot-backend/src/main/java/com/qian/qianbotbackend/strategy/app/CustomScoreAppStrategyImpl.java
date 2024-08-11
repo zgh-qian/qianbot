@@ -6,7 +6,6 @@ import com.qian.qianbotbackend.model.app.domain.Appanswer;
 import com.qian.qianbotbackend.model.app.domain.Appresult;
 import com.qian.qianbotbackend.model.app.dto.appanswer.AppAnswerDTO;
 import com.qian.qianbotbackend.service.*;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;

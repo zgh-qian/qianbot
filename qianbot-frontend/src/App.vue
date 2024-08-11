@@ -1,8 +1,14 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 import BasicLayout from "@/layouts/BasicLayout.vue";
+import { onMounted } from "vue";
 
 const route = useRoute();
+
+// 设置网页标题
+onMounted(() => {
+  document.title = "QianBot";
+});
 </script>
 <template>
   <div id="app">

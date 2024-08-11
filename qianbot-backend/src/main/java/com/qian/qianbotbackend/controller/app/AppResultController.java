@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/app/result")
-@Slf4j
 public class AppResultController {
     @Resource
     private AppresultService appresultService;

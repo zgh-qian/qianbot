@@ -1,0 +1,30 @@
+[
+  {
+    "code": "public class Main {  public static void main(String[] args) { System.out.println(\"Hello, World!\"); }}",
+    "language": "java"
+  },
+  {
+    "code": "print(\"Hello, World!\")",
+    "language": "python"
+  },
+  {
+    "code": "console.log(\"Hello, World!\");",
+    "language": "javascript"
+  },
+  {
+    "code": "console.log(\"Hello, World!\");",
+    "language": "typescript"
+  },
+  {
+    "code": "package main \nimport \"fmt\"\n func main() { fmt.Println(\"Hello, World!\");}",
+    "language": "go"
+  },
+  {
+    "code": "#include <stdio.h>int main() { printf(\"Hello, World!\n\");return 0;}",
+    "language": "c"
+  },
+  {
+    "code": "#include <iostream>int main() {std::cout << \"Hello, World!\" << std::endl;return 0;}",
+    "language": "cpp"
+  }
+]

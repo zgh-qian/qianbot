@@ -4,14 +4,13 @@ import cn.hutool.core.io.FileUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.qian.qianbotbackend.async.ChartAsyncService;
+import com.qian.qianbotbackend.async.ChartServiceAsync;
 import com.qian.qianbotbackend.common.BaseContext;
 import com.qian.qianbotbackend.common.ErrorCode;
 import com.qian.qianbotbackend.constant.CommonConstant;
 import com.qian.qianbotbackend.enums.ChartStatusEnum;
 import com.qian.qianbotbackend.exception.BusinessException;
 import com.qian.qianbotbackend.exception.ThrowUtils;
-import com.qian.qianbotbackend.manager.AIManager;
 import com.qian.qianbotbackend.model.chart.domain.Chart;
 import com.qian.qianbotbackend.model.chart.dto.ChartAddRequest;
 import com.qian.qianbotbackend.model.chart.dto.ChartQueryRequest;
@@ -25,18 +24,12 @@ import com.qian.qianbotbackend.utils.SqlUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.qian.qianbotbackend.constant.AIConstant.AI_CHART_GENERATE_SYSTEM_MESSAGE;
 import static com.qian.qianbotbackend.constant.ChartConstant.*;
 
 /**
@@ -51,7 +44,7 @@ public class ChartServiceImpl extends ServiceImpl<ChartMapper, Chart>
     private UserService userService;
 
     @Resource
-    private ChartAsyncService chartAsyncService;
+    private ChartServiceAsync chartServiceAsync;
 
     @Override
     public void validChart(Chart chart, boolean isAdd) {
@@ -218,7 +211,7 @@ public class ChartServiceImpl extends ServiceImpl<ChartMapper, Chart>
         chart.setChartStatus(ChartStatusEnum.CHART_STATUS_ENUM_RUNNING.getValue());
         boolean update = this.updateById(chart);
         ThrowUtils.throwIf(!update, ErrorCode.OPERATION_ERROR);
-        chartAsyncService.genChart(chart);
+        chartServiceAsync.genChart(chart);
         return true;
     }
 }

@@ -113,6 +113,7 @@ watchEffect(() => {
         search-button
         @search="doSearch"
       />
+      <a-button type="primary" href="/oj/question/add">添加题目</a-button>
     </div>
     <a-row>
       <a-col :span="5" class="sider">

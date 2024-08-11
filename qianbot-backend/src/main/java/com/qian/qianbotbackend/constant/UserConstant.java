@@ -41,7 +41,7 @@ public interface UserConstant {
 
     // endregion
 
-    // region
+    // region 返回信息
     String USER_PARAMS_NULL = "参数为空";
     String USER_ACCOUNT_SHORT = "用户账号过短";
     String USER_PASSWORD_SHORT = "用户密码过短";

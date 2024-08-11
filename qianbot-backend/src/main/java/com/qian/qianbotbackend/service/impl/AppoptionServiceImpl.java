@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -127,6 +128,11 @@ public class AppoptionServiceImpl extends ServiceImpl<AppoptionMapper, Appoption
     @Override
     public List<Appoption> getAppOptionList(Long questionId) {
         return appoptionMapper.selectList(Wrappers.lambdaQuery(Appoption.class).eq(Appoption::getQuestionId, questionId));
+    }
+
+    @Override
+    public List<String> getOptionKeyList(List<Long> optionList) {
+        return optionList.stream().map(option -> this.getById(option).getOptionKey()).collect(Collectors.toList());
     }
 }
 

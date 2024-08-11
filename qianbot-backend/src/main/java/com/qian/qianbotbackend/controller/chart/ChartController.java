@@ -23,9 +23,9 @@ import javax.annotation.Resource;
 
 import static com.qian.qianbotbackend.enums.user.UserUsageEnum.USER_USAGE_ENUM_CHART;
 
+@Slf4j
 @RestController
 @RequestMapping("/chart")
-@Slf4j
 public class ChartController {
     @Resource
     private ChartService chartService;

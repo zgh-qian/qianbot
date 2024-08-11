@@ -11,13 +11,23 @@ const githubUrl = "https://github.com/zgh-qian";
       不仅如此，智能图表分析功能允许你上传文件，通过AI技术进行深入分析，帮助你揭示数据背后的洞见和趋势。
     </a-typography-paragraph>
     <a-typography-paragraph>
-      无论你是寻找娱乐放松，还是需要数据驱动的决策支持，网站都能为你提供令人满意的解决方案。探索你的潜力，了解你的数据，尽在平台上。
+      快来试试代码评测！ 测试和优化你的编程技能，挑战各种算法和问题。
+    </a-typography-paragraph>
+    <a-typography-paragraph>
+      代码沙箱支持在线运行代码，让你可以轻松地测试代码。 目前支持 Java Python C
+      C++ Go JavaScript TypeScript
     </a-typography-paragraph>
     <a-typography-paragraph>
       <a-link href="/app">【速戳】快来试试答题应用！！！</a-link>
     </a-typography-paragraph>
     <a-typography-paragraph>
       <a-link href="/chart">【速戳】快来试试图表分析！！！</a-link>
+    </a-typography-paragraph>
+    <a-typography-paragraph>
+      <a-link href="/oj">【速戳】快来试试代码评测！！！</a-link>
+    </a-typography-paragraph>
+    <a-typography-paragraph>
+      <a-link href="/codesandbox">【速戳】快来试试代码沙箱！！！</a-link>
     </a-typography-paragraph>
     <a-typography-paragraph>
       <a-link :href="githubUrl">欢迎访问GitHub仓库</a-link>

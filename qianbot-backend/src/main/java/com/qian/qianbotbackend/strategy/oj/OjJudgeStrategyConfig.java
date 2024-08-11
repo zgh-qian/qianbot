@@ -1,0 +1,18 @@
+package com.qian.qianbotbackend.strategy.oj;
+
+import org.springframework.stereotype.Component;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Component
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface OjJudgeStrategyConfig {
+    /**
+     * 编程语言
+     */
+    String Language();
+}

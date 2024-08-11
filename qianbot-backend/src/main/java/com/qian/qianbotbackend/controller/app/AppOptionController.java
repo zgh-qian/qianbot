@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
+@Slf4j
 @RestController
 @RequestMapping("/app/option")
-@Slf4j
 public class AppOptionController {
     @Resource
     private AppoptionService appoptionService;

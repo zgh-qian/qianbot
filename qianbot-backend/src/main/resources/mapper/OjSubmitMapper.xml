@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qian.qianbotbackend.mapper.OjSubmitMapper">
+
+    <resultMap id="BaseResultMap" type="com.qian.qianbotbackend.model.oj.domain.OjSubmit">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="language" column="language" jdbcType="VARCHAR"/>
+            <result property="code" column="code" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="VARCHAR"/>
+            <result property="detail" column="detail" jdbcType="VARCHAR"/>
+            <result property="timeUsed" column="timeUsed" jdbcType="BIGINT"/>
+            <result property="memoryUsed" column="memoryUsed" jdbcType="BIGINT"/>
+            <result property="judgeStatus" column="judgeStatus" jdbcType="TINYINT"/>
+            <result property="questionId" column="questionId" jdbcType="BIGINT"/>
+            <result property="userId" column="userId" jdbcType="BIGINT"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,language,code,
+        status,detail,timeUsed,
+        memoryUsed,judgeStatus,questionId,
+        userId,createTime,updateTime,
+        isDelete
+    </sql>
+</mapper>

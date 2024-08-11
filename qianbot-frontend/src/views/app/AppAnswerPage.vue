@@ -131,15 +131,17 @@ const doSubmit = async () => {
   });
   if (res.data.code === 200 && res.data.data) {
     message.success("提交成功，即将跳转结果页面");
-    let fetchAnswer = false;
-    while (!fetchAnswer) {
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
       const answerRes = await getAppAnswerVoByIdUsingGet({
         id: res.data.data as any,
       });
       if (answerRes.data.code === 200) {
-        fetchAnswer = true;
         submitting.value = false;
+        break;
       }
+      // 等待1秒钟
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     }
     router.push(`/app/result/${res.data.data}`);
   } else {

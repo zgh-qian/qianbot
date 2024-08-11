@@ -1,7 +1,7 @@
 <template>
   <a-button type="outline" @click="handleClick"
-    >AI 生成题目(剩余{{ props.remainingCount }}次机会)</a-button
-  >
+    >AI 生成题目(剩余{{ props.remainingCount }}次机会)
+  </a-button>
   <a-drawer
     :width="340"
     :visible="visible"
@@ -139,8 +139,13 @@ const handleSSESubmit = async () => {
   sseSubmitting.value = true;
   // 建立 SSE 连接
   // 手动填写完整的后端地址
+  var baseUrl = "http://localhost:9000/api/app/ai/generate/sse";
+  if (process.env.NODE_ENV === "development") {
+    baseUrl =
+      "https://qianbot-backend-115575-5-1317982725.sh.run.tcloudbase.com";
+  }
   const eventSource = new EventSource(
-    `http://localhost:9000/api/app/ai/generate/sse?appId=${props.appId}&optionNumber=${form.optionNumber}&questionNumber=${form.questionNumber}`,
+    `${baseUrl}?appId=${props.appId}&optionNumber=${form.optionNumber}&questionNumber=${form.questionNumber}`,
     {
       withCredentials: true,
     }

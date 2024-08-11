@@ -9,13 +9,16 @@ import AppDetailPage from "@/views/app/AppDetailPage.vue";
 import AppAnswerPage from "@/views/app/AppAnswerPage.vue";
 import AppResultPage from "@/views/app/AppResultPage.vue";
 import MyAppPage from "@/views/app/MyAppPage.vue";
-import HomePage from "@/views/home/HomePage.vue";
 import AppHistoryPage from "@/views/app/AppHistoryPage.vue";
 import AdminLayout from "@/layouts/AdminLayout.vue";
 import AdminPage from "@/views/admin/AdminPage.vue";
 import ChartPage from "@/views/chart/ChartPage.vue";
 import ChartHistoryPage from "@/views/chart/ChartHistoryPage.vue";
 import UserCenter from "@/views/user/UserCenter.vue";
+import OjPage from "@/views/oj/OjPage.vue";
+import OjQuestionPage from "@/views/oj/OjQuestionPage.vue";
+import OjQuestionAddPage from "@/views/oj/OjQuestionAddPage.vue";
+import CodeSandboxPage from "@/views/codesandbox/CodeSandboxPage.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -105,7 +108,7 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   /**
-   * 用户相关页面
+   * 图表历史
    */
   {
     path: "/chart/history",
@@ -116,6 +119,74 @@ const routes: Array<RouteRecordRaw> = [
       access: accessEnum.USER,
     },
   },
+  /**
+   * oj
+   */
+  {
+    path: "/oj",
+    name: "代码评测",
+    component: OjPage,
+    meta: {
+      index: 3,
+      showInMenu: true,
+      access: accessEnum.NOT_LOGIN,
+    },
+  },
+  /**
+   * oj题目详情
+   */
+  {
+    path: "/oj/:id",
+    name: "题目详情",
+    component: OjQuestionPage,
+    props: true,
+    meta: {
+      showInMenu: false,
+      access: accessEnum.NOT_LOGIN,
+    },
+  },
+  /**
+   * oj添加题目
+   */
+  {
+    path: "/oj/question/add",
+    name: "添加题目页面",
+    component: OjQuestionAddPage,
+    props: true,
+    meta: {
+      showInMenu: false,
+      access: accessEnum.ADMIN,
+    },
+  },
+  /**
+   * oj修改题目
+   */
+  {
+    path: "/oj/question/update/:id",
+    name: "修改题目页面",
+    component: OjQuestionAddPage,
+    props: true,
+    meta: {
+      showInMenu: false,
+      access: accessEnum.ADMIN,
+    },
+  },
+  /**
+   * codesandbox
+   */
+  {
+    path: "/codesandbox",
+    name: "代码沙箱",
+    component: CodeSandboxPage,
+    meta: {
+      index: 4,
+      showInMenu: true,
+      access: accessEnum.NOT_LOGIN,
+    },
+  },
+  /**
+   * 用户相关页面
+   */
   {
     path: "/user",
     name: "用户",

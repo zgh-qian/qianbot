@@ -4,13 +4,12 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.qian.qianbotbackend.async.AppAsyncService;
+import com.qian.qianbotbackend.async.AppServiceAsync;
 import com.qian.qianbotbackend.common.BaseContext;
 import com.qian.qianbotbackend.common.ErrorCode;
 import com.qian.qianbotbackend.constant.CommonConstant;
 import com.qian.qianbotbackend.enums.app.AppAnswerStatusEnum;
 import com.qian.qianbotbackend.enums.app.AppReviewStatsEnum;
-import com.qian.qianbotbackend.exception.BusinessException;
 import com.qian.qianbotbackend.exception.ThrowUtils;
 import com.qian.qianbotbackend.model.app.domain.App;
 import com.qian.qianbotbackend.model.app.domain.Appanswer;
@@ -23,13 +22,11 @@ import com.qian.qianbotbackend.model.app.vo.AppanswerVO;
 import com.qian.qianbotbackend.service.AppService;
 import com.qian.qianbotbackend.service.AppanswerService;
 import com.qian.qianbotbackend.mapper.AppanswerMapper;
-import com.qian.qianbotbackend.strategy.app.AppStrategyExecutor;
 import com.qian.qianbotbackend.utils.SqlUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -49,7 +46,7 @@ public class AppanswerServiceImpl extends ServiceImpl<AppanswerMapper, Appanswer
     private AppService appService;
 
     @Resource
-    private AppAsyncService appAsyncService;
+    private AppServiceAsync appServiceAsync;
 
     @Override
     public Long addAppAnswer(AppanswerAddRequest appanswerAddRequest) {
@@ -76,7 +73,7 @@ public class AppanswerServiceImpl extends ServiceImpl<AppanswerMapper, Appanswer
         appAnswerDTO.setAppId(appId);
         appAnswerDTO.setUserAnswer(userAnswer);
         appAnswerDTO.setApp(app);
-        appAsyncService.asyncUpdateAppAnswer(appAnswerDTO);
+        appServiceAsync.asyncUpdateAppAnswer(appAnswerDTO);
         return appanswer.getId();
     }
 

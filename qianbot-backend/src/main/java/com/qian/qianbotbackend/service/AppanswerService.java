@@ -3,6 +3,7 @@ package com.qian.qianbotbackend.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qian.qianbotbackend.model.app.domain.Appanswer;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.qian.qianbotbackend.model.app.dto.appanswer.AppAnswerDTO;
 import com.qian.qianbotbackend.model.app.dto.appanswer.AppanswerAddRequest;
 import com.qian.qianbotbackend.model.app.dto.appanswer.AppanswerQueryRequest;
 import com.qian.qianbotbackend.model.app.vo.AppAnswerCountVO;

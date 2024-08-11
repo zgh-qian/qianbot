@@ -24,4 +24,6 @@ public interface AppoptionService extends IService<Appoption> {
     Appoption getAppOption(Long id);
 
     List<Appoption> getAppOptionList(Long questionId);
+
+    List<String> getOptionKeyList(List<Long> optionList);
 }

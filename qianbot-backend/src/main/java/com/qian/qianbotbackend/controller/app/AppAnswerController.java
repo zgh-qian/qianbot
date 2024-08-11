@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/app/answer")
-@Slf4j
 public class AppAnswerController {
     @Resource
     private AppanswerService appanswerService;

@@ -129,6 +129,7 @@ create table if not exists appanswer
     index idx_appId (appId),
     index idx_userId (userId)
 ) comment '用户答题记录' collate = utf8mb4_unicode_ci;
+
 -- 图表
 drop table if exists chart;
 create table if not exists chart
@@ -146,3 +147,106 @@ create table if not exists chart
     updateTime  datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     isDelete    tinyint  default 0                 not null comment '是否删除'
 ) comment '图表信息表' collate = utf8mb4_unicode_ci;
+
+-- 题目表
+drop table if exists ojquestion;
+create table if not exists ojquestion
+(
+    id         bigint auto_increment primary key comment 'id',
+    title      varchar(512)                       not null comment '题目标题',
+    tags       varchar(512)                       not null comment '标签(json数组)',
+    difficulty tinyint                            not null comment '难度，0-简单，1-中等，2-困难',
+    userId     bigint                             not null comment '创建用户id',
+    createTime datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    updateTime datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
+    isDelete   tinyint  default 0                 not null comment '是否删除',
+    index idx_id (id)
+) comment '题目表' collate = utf8mb4_unicode_ci;
+-- 题目详情表
+drop table if exists ojdetail;
+create table if not exists ojdetail
+(
+    id          bigint auto_increment primary key comment 'id',
+    timeLimit   bigint                             not null comment '时间限制(ms)',
+    memoryLimit bigint                             not null comment '内存限制(kb)',
+    content     text                               not null comment '内容',
+    template    text                               null comment '模板代码(json)',
+    answer      text                               null comment '题目答案(json)',
+    tips        text                               null comment '提示(json数组)',
+    questionId  bigint                             not null comment '题目id',
+    userId      bigint                             not null comment '创建用户id',
+    createTime  datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    updateTime  datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
+    isDelete    tinyint  default 0                 not null comment '是否删除'
+) comment '题目详情表' collate = utf8mb4_unicode_ci;
+-- 题目判题用例表
+drop table if exists ojjudgecase;
+create table if not exists ojjudgecase
+(
+    id         bigint auto_increment primary key comment 'id',
+    input      text                               not null comment '输入用例',
+    output     text                               not null comment '输出用例',
+    questionId bigint                             not null comment '题目id',
+    userId     bigint                             not null comment '创建用户id',
+    createTime datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    updateTime datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
+    isDelete   tinyint  default 0                 not null comment '是否删除'
+) comment '题目判题用例表' collate = utf8mb4_unicode_ci;
+-- 题目提交表
+drop table if exists ojsubmit;
+create table if not exists ojsubmit
+(
+    id          bigint auto_increment primary key comment 'id',
+    language    varchar(128)                       not null comment '编程语言',
+    code        text                               not null comment '代码',
+    status      varchar(128)                       null comment '运行结果，比如：AC',
+    detail      text                               null comment '运行结果信息',
+    timeUsed    bigint                             null comment '时间消耗(ms)',
+    memoryUsed  bigint                             null comment '内存消耗(kb)',
+    judgeStatus tinyint  default 0                 not null comment '判题状态：0-待判题，1-判题中，2-判题成功，3-判题失败',
+    questionId  bigint                             not null comment '题目id',
+    userId      bigint                             not null comment '创建用户id',
+    createTime  datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    updateTime  datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
+    isDelete    tinyint  default 0                 not null comment '是否删除'
+) comment '题目提交表' collate = utf8mb4_unicode_ci;
+-- 题目统计表
+drop table if exists ojstats;
+create table if not exists ojstats
+(
+    id           bigint auto_increment primary key comment 'id',
+    AC           int      default 0                 not null comment '通过数',
+    WA           int      default 0                 not null comment '输出错误数',
+    CE           int      default 0                 not null comment '编译错误数',
+    RE           int      default 0                 not null comment '运行错误数',
+    PE           int      default 0                 not null comment '格式错误数',
+    TLE          int      default 0                 not null comment '时间超限数',
+    MLE          int      default 0                 not null comment '内存超限数',
+    thumbCount   int      default 0                 not null comment '点赞数',
+    favourCount  int      default 0                 not null comment '收藏数',
+    commentCount int      default 0                 not null comment '评论数',
+    userId       bigint                             not null comment '创建用户id',
+    createTime   datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    updateTime   datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
+    isDelete     tinyint  default 0                 not null comment '是否删除'
+) comment '题目统计表' collate = utf8mb4_unicode_ci;
+-- 用户代码表
+drop table if exists usercode;
+create table if not exists usercode
+(
+    id           bigint auto_increment primary key comment 'id',
+    codeTitle    varchar(128)                       not null comment '标题',
+    codeLanguage varchar(128)                       not null comment '语言',
+    codeContent  text                               not null comment '代码',
+    codeType     varchar(128)                       null comment '代码类型，比如：算法、前端、后端',
+    codeTags     varchar(512)                       null comment '代码标签(json数组)',
+    codeDesc     text                               null comment '代码描述',
+    codePwd      varchar(128)                       null comment '代码密码',
+    expireTime   datetime                           null comment '过期时间',
+    isPublic     tinyint  default 0                 not null comment '是否公开：0-私密，1-公开',
+    isExpire     tinyint  default 0                 not null comment '是否过期：0-未过期，1-已过期',
+    userId       bigint                             not null comment '创建用户id',
+    createTime   datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    updateTime   datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
+    isDelete     tinyint  default 0                 not null comment '是否删除'
+) comment '用户代码表' collate = utf8mb4_unicode_ci;

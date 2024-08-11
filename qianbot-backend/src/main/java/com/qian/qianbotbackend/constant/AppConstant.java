@@ -10,4 +10,9 @@ public interface AppConstant {
     String APP_REVIEW_RUNNING = "应用审核中，请勿重复审核";
     String APP_REVIEW_PASS = "应用已审核通过";
     String APP_REVIEW_REJECT = "应用已审核拒绝，请修改应用";
+
+    /**
+     * 分布式锁
+     */
+    String APP_ANSWER_LOCK = "APP_ANSWER_LOCK_";
 }

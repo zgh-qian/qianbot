@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
+@Slf4j
 @RestController
 @RequestMapping("/app/question")
-@Slf4j
 public class AppQuestionController {
     @Resource
     private AppquestionService appquestionService;

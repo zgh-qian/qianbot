@@ -65,27 +65,5 @@ knife4j:
           - com.qian.qianbotbackend.controller.app
           - com.qian.qianbotbackend.controller.chart
           - com.qian.qianbotbackend.controller.file
-# 智谱AI
-ai:
-  api-key: xxx
-# yucongming
-yuapi:
-  client:
-    access-key: xxx
-    secret-key: xxx
-# cos
-cos:
-  client:
-    secretId: xxx
-    secretKey: xxx
-    region: xxx
-    bucket: xxx
-    url: xxx
-# 邮件
-mail:
-  # 发送人名称
-  sendName: xxx
-  # 发送邮箱
-  sendEmail: xxx
-  # 授权码
-  authorizationCode: xxx
+          - com.qian.qianbotbackend.controller.oj
+          - com.qian.qianbotbackend.controller.codesandbox

@@ -25,9 +25,9 @@ import java.util.List;
 import static com.qian.qianbotbackend.constant.UserConstant.USER_LOGIN_STATE;
 import static com.qian.qianbotbackend.enums.user.UserUsageEnum.USER_USAGE_ENUM_APP_AI;
 
+@Slf4j
 @RestController
 @RequestMapping("/app")
-@Slf4j
 public class AppController {
     @Resource
     private AppService appService;
@@ -210,6 +210,7 @@ public class AppController {
             if (user.getUserRole().equals(UserConstant.ROLE_BAN)) {
                 throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
             }
+            BaseContext.setUserId(user.getId());
             // 校验是否存在次数
             ThrowUtils.throwIf(
                     !userUsageService.subUserUsage(new UserUsageDTO(null, USER_USAGE_ENUM_APP_AI.getText(), null)),

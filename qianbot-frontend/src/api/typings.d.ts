@@ -334,6 +334,12 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponseCodeExecuteResponse_ = {
+    code?: number;
+    data?: CodeExecuteResponse;
+    message?: string;
+  };
+
   type BaseResponseInt_ = {
     code?: number;
     data?: number;
@@ -370,6 +376,12 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponseListCodeSandboxLanguage_ = {
+    code?: number;
+    data?: CodeSandboxLanguage[];
+    message?: string;
+  };
+
   type BaseResponseLoginUserVO_ = {
     code?: number;
     data?: LoginUserVO;
@@ -379,6 +391,24 @@ declare namespace API {
   type BaseResponseLong_ = {
     code?: number;
     data?: number;
+    message?: string;
+  };
+
+  type BaseResponseOjJudgecaseVO_ = {
+    code?: number;
+    data?: OjJudgecaseVO;
+    message?: string;
+  };
+
+  type BaseResponseOjQuestionDetailVO_ = {
+    code?: number;
+    data?: OjQuestionDetailVO;
+    message?: string;
+  };
+
+  type BaseResponseOjSubmitVO_ = {
+    code?: number;
+    data?: OjSubmitVO;
     message?: string;
   };
 
@@ -406,9 +436,39 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponsePageOjJudgecaseVO_ = {
+    code?: number;
+    data?: PageOjJudgecaseVO_;
+    message?: string;
+  };
+
+  type BaseResponsePageOjQuestionVO_ = {
+    code?: number;
+    data?: PageOjQuestionVO_;
+    message?: string;
+  };
+
+  type BaseResponsePageOjSubmitVO_ = {
+    code?: number;
+    data?: PageOjSubmitVO_;
+    message?: string;
+  };
+
   type BaseResponsePageUser_ = {
     code?: number;
     data?: PageUser_;
+    message?: string;
+  };
+
+  type BaseResponsePageUserCodeSelfVO_ = {
+    code?: number;
+    data?: PageUserCodeSelfVO_;
+    message?: string;
+  };
+
+  type BaseResponsePageUserCodeVO_ = {
+    code?: number;
+    data?: PageUserCodeVO_;
     message?: string;
   };
 
@@ -427,6 +487,18 @@ declare namespace API {
   type BaseResponseUser_ = {
     code?: number;
     data?: User;
+    message?: string;
+  };
+
+  type BaseResponseUserCodeSelfVO_ = {
+    code?: number;
+    data?: UserCodeSelfVO;
+    message?: string;
+  };
+
+  type BaseResponseUserCodeVO_ = {
+    code?: number;
+    data?: UserCodeVO;
     message?: string;
   };
 
@@ -475,6 +547,22 @@ declare namespace API {
     id?: number;
     updateTime?: string;
     userId?: number;
+  };
+
+  type CodeExecuteRequest = {
+    code?: string;
+    language?: string;
+  };
+
+  type CodeExecuteResponse = {
+    exitCode?: number;
+    message?: string;
+  };
+
+  type CodeSandboxLanguage = {
+    templateCode?: string;
+    text?: string;
+    value?: string;
   };
 
   type DeleteRequest = {
@@ -547,6 +635,21 @@ declare namespace API {
     id?: number;
   };
 
+  type getOjJudgecaseByIdUsingGETParams = {
+    /** id */
+    id?: number;
+  };
+
+  type getOjQuestionDetailUsingGETParams = {
+    /** id */
+    id?: number;
+  };
+
+  type getOjSubmitVOUsingGETParams = {
+    /** id */
+    id?: number;
+  };
+
   type getPasswordCodeUsingGETParams = {
     /** email */
     email?: string;
@@ -558,6 +661,16 @@ declare namespace API {
   };
 
   type getUserByIdUsingGETParams = {
+    /** id */
+    id?: number;
+  };
+
+  type getUserCodeSelfVOByIdUsingGETParams = {
+    /** id */
+    id?: number;
+  };
+
+  type getUserCodeVOByIdUsingGETParams = {
     /** id */
     id?: number;
   };
@@ -581,6 +694,133 @@ declare namespace API {
     userPhone?: string;
     userProfile?: string;
     userRole?: string;
+  };
+
+  type OjJudgecaseAddRequest = {
+    input?: string;
+    output?: string;
+    questionId?: number;
+  };
+
+  type OjJudgecaseQueryRequest = {
+    current?: number;
+    pageSize?: number;
+    questionId?: number;
+    sortField?: string;
+    sortOrder?: string;
+  };
+
+  type OjJudgecaseUpdateRequest = {
+    id?: number;
+    input?: string;
+    output?: string;
+  };
+
+  type OjJudgecaseVO = {
+    createTime?: string;
+    id?: number;
+    input?: string;
+    output?: string;
+    questionId?: number;
+    updateTime?: string;
+    userId?: number;
+  };
+
+  type OjQuestionDetailAddRequest = {
+    answer?: string[];
+    content?: string;
+    difficulty?: number;
+    memoryLimit?: number;
+    tags?: string[];
+    template?: string[];
+    timeLimit?: number;
+    tips?: string[];
+    title?: string;
+  };
+
+  type OjQuestionDetailUpdateRequest = {
+    answer?: string[];
+    content?: string;
+    difficulty?: number;
+    id?: number;
+    memoryLimit?: number;
+    tags?: string[];
+    template?: string[];
+    timeLimit?: number;
+    tips?: string[];
+    title?: string;
+  };
+
+  type OjQuestionDetailVO = {
+    content?: string;
+    createTime?: string;
+    difficulty?: number;
+    id?: number;
+    memoryLimit?: number;
+    tags?: string[];
+    template?: string[];
+    timeLimit?: number;
+    tips?: string[];
+    title?: string;
+    updateTime?: string;
+    userId?: number;
+  };
+
+  type OjQuestionQueryRequest = {
+    current?: number;
+    difficulty?: number;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+    tags?: string[];
+    title?: string;
+  };
+
+  type OjQuestionVO = {
+    createTime?: string;
+    difficulty?: number;
+    id?: number;
+    tags?: string[];
+    title?: string;
+    updateTime?: string;
+    userId?: number;
+  };
+
+  type OjSubmitAddRequest = {
+    code?: string;
+    language?: string;
+    questionId?: number;
+  };
+
+  type OjSubmitQueryRequest = {
+    current?: number;
+    detail?: string;
+    id?: number;
+    judgeStatus?: number;
+    language?: string;
+    memoryUsed?: number;
+    pageSize?: number;
+    questionId?: number;
+    sortField?: string;
+    sortOrder?: string;
+    status?: string;
+    timeUsed?: number;
+    userId?: number;
+  };
+
+  type OjSubmitVO = {
+    code?: string;
+    createTime?: string;
+    detail?: string;
+    id?: number;
+    judgeStatus?: number;
+    language?: string;
+    memoryUsed?: number;
+    questionId?: number;
+    status?: string;
+    timeUsed?: number;
+    updateTime?: string;
+    userId?: number;
   };
 
   type OrderItem = {
@@ -640,6 +880,45 @@ declare namespace API {
     total?: number;
   };
 
+  type PageOjJudgecaseVO_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: OjJudgecaseVO[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type PageOjQuestionVO_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: OjQuestionVO[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type PageOjSubmitVO_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: OjSubmitVO[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
   type PageUser_ = {
     countId?: string;
     current?: number;
@@ -648,6 +927,32 @@ declare namespace API {
     orders?: OrderItem[];
     pages?: number;
     records?: User[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type PageUserCodeSelfVO_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: UserCodeSelfVO[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type PageUserCodeVO_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: UserCodeVO[];
     searchCount?: boolean;
     size?: number;
     total?: number;
@@ -696,6 +1001,81 @@ declare namespace API {
     userPhone?: string;
     userProfile?: string;
     userRole?: string;
+  };
+
+  type UserCodeAddRequest = {
+    codeContent?: string;
+    codeDesc?: string;
+    codeLanguage?: string;
+    codePwd?: string;
+    codeTags?: string[];
+    codeTitle?: string;
+    codeType?: string;
+    expireTime?: string;
+    isExpire?: number;
+    isPublic?: number;
+  };
+
+  type UserCodeQueryRequest = {
+    codeContent?: string;
+    codeDesc?: string;
+    codeLanguage?: string;
+    codeTags?: string[];
+    codeTitle?: string;
+    codeType?: string;
+    current?: number;
+    id?: number;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+    userId?: number;
+  };
+
+  type UserCodeSelfVO = {
+    codeContent?: string;
+    codeDesc?: string;
+    codeLanguage?: string;
+    codePwd?: string;
+    codeTags?: string[];
+    codeTitle?: string;
+    codeType?: string;
+    createTime?: string;
+    expireTime?: string;
+    id?: number;
+    isExpire?: number;
+    isPublic?: number;
+    updateTime?: string;
+    userId?: number;
+  };
+
+  type UserCodeUpdateRequest = {
+    codeContent?: string;
+    codeDesc?: string;
+    codeLanguage?: string;
+    codePwd?: string;
+    codeTags?: string[];
+    codeTitle?: string;
+    codeType?: string;
+    expireTime?: string;
+    id?: number;
+    isExpire?: number;
+    isPublic?: number;
+  };
+
+  type UserCodeVO = {
+    codeContent?: string;
+    codeDesc?: string;
+    codeLanguage?: string;
+    codeTags?: string[];
+    codeTitle?: string;
+    codeType?: string;
+    createTime?: string;
+    expireTime?: string;
+    id?: number;
+    isExpire?: number;
+    isPublic?: number;
+    updateTime?: string;
+    userId?: number;
   };
 
   type UserLoginRequest = {

@@ -6,12 +6,13 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.qian.qianbotbackend.async.AppAsyncService;
+import com.qian.qianbotbackend.async.AppServiceAsync;
 import com.qian.qianbotbackend.common.BaseContext;
 import com.qian.qianbotbackend.common.DeleteRequest;
 import com.qian.qianbotbackend.common.ErrorCode;
 import com.qian.qianbotbackend.common.ReviewDTO;
 import com.qian.qianbotbackend.constant.CommonConstant;
+import com.qian.qianbotbackend.constant.UserConstant;
 import com.qian.qianbotbackend.enums.app.AppTypeEnum;
 import com.qian.qianbotbackend.enums.app.AppReviewStatsEnum;
 import com.qian.qianbotbackend.enums.app.AppScoringStrategyEnum;
@@ -30,13 +31,12 @@ import com.qian.qianbotbackend.mapper.AppMapper;
 import com.qian.qianbotbackend.utils.SqlUtils;
 import com.zhipu.oapi.service.v4.model.ModelData;
 import io.reactivex.Flowable;
+import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
-import lombok.Data;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -47,7 +47,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static com.qian.qianbotbackend.constant.AIConstant.AI_GENERATE_QUESTION_SYSTEM_MESSAGE;
-import static com.qian.qianbotbackend.constant.AIConstant.AI_REVIEW_APP_SYSTEM_MESSAGE;
 import static com.qian.qianbotbackend.constant.AppConstant.*;
 
 /**
@@ -65,7 +64,7 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App>
     private AIManager aiManager;
 
     @Resource
-    private AppAsyncService appAsyncService;
+    private AppServiceAsync appServiceAsync;
 
     @Lazy
     @Resource
@@ -82,6 +81,9 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App>
     @Lazy
     @Resource
     private AppanswerService appanswerService;
+
+    @Resource
+    private Scheduler vipScheduler;
 
     @Override
     public void validApp(App app, boolean add) {
@@ -543,8 +545,21 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App>
         AtomicInteger leftCount = new AtomicInteger(0);
         StringBuilder data = new StringBuilder();
         Flowable<ModelData> modelDataFlowable = aiManager.doStableStreamRequest(AI_GENERATE_QUESTION_SYSTEM_MESSAGE, userMessage);
+        Scheduler scheduler;
+        // 获取用户身份
+        String userRole = userService.getUserById(BaseContext.getUserId()).getUserRole();
+        if (userRole.equals(UserConstant.ROLE_VIP)) {
+            // 切换 vip 线程
+            scheduler = vipScheduler;
+        } else if (userRole.equals(UserConstant.ROLE_ADMIN)) {
+            // 切换 vip 线程
+            scheduler = vipScheduler;
+        } else {
+            // 普通线程
+            scheduler = Schedulers.io();
+        }
         modelDataFlowable
-                .observeOn(Schedulers.io())
+                .observeOn(scheduler)
                 .map(chunk -> chunk.getChoices().get(0).getDelta().getContent())
                 .map(message -> message.replaceAll("\\s", ""))
                 .filter(StrUtil::isNotBlank)
@@ -586,7 +601,7 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App>
         app.setReviewStatus(AppReviewStatsEnum.REVIEW_STATS_ENUM_RUNNING.getValue());
         boolean update = this.updateById(app);
         ThrowUtils.throwIf(!update, ErrorCode.SYSTEM_ERROR);
-        appAsyncService.doAIAppReviewAsync(app);
+        appServiceAsync.doAIAppReviewAsync(app);
         return true;
     }
 

@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
+@Slf4j
 @RestController
 @RequestMapping("/user/usage")
-@Slf4j
 public class UserUsageController {
     @Resource
     private UserUsageService userUsageService;

@@ -18,7 +18,9 @@ public enum FileUploadBizEnum {
 
     APP_OPTION("应用选项图片", "app_option"),
 
-    APP_RESULT("评分结果图片", "app_result");
+    APP_RESULT("评分结果图片", "app_result"),
+
+    OJ_QUESTION("OJ题目", "oj_question");
 
     private final String text;
 

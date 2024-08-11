@@ -8,7 +8,7 @@ export const isDev = process.env.NODE_ENV === "development";
 const myAxios = axios.create({
   baseURL: isDev
     ? "http://localhost:9000"
-    : "https://localhost:9000",
+    : "https://qianbot-backend-115575-5-1317982725.sh.run.tcloudbase.com",
   timeout: 100000,
   withCredentials: true,
 });
